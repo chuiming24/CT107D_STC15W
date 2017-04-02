@@ -1,0 +1,14 @@
+"main.obj",
+"exti.obj",
+"display.obj",
+"key.obj",
+"iic.obj",
+"ds1302.obj",
+"onewire.obj",
+"at24c02.obj",
+"delay.obj",
+"ds18B20.obj",
+"time.obj",
+"frecounter.obj" 
+TO "main" 
+RAMSIZE(256) 

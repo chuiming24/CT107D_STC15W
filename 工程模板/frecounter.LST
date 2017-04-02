@@ -1,0 +1,75 @@
+C51 COMPILER V9.01   FRECOUNTER                                                            04/02/2017 12:20:52 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE FRECOUNTER
+OBJECT MODULE PLACED IN frecounter.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE frecounter.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <config.h>
+   2          #include <frecounter.h>
+   3          
+   4          bit OpenFreCntFlag = 1;
+   5          uint FreCntTimeCnt = 1000;
+   6          uint FreCntValue = 0;
+   7          
+   8          
+   9          void OpenFreCnt(){
+  10   1              OpenFreCntFlag = 1;
+  11   1      }
+  12          void CloseFreCnt(){
+  13   1              OpenFreCntFlag = 0;
+  14   1      }
+  15          
+  16          void FreCntInit(void){
+  17   1              TMOD |= 0x50;
+  18   1              TH1 = 0;
+  19   1              TL1 = 0;
+  20   1              TR1 = 0;
+  21   1      }
+  22          
+  23          uint getFreCntValue(){
+  24   1              if(OpenFreCntFlag == 0){
+  25   2                      return 0xffff;
+  26   2              }else{
+  27   2                      return FreCntValue;
+  28   2              }
+  29   1      }
+  30          
+  31          uint getFreCnt(){
+  32   1              uint temp;
+  33   1              TR1 = 0;
+  34   1              temp = ((uint)TH1 *256 + TL1);
+  35   1              TH1 = 0;
+  36   1              TL1 = 0;
+  37   1      
+  38   1              return temp;
+  39   1      }
+  40          
+  41          void FreCntScan(){
+  42   1              if(OpenFreCntFlag){
+  43   2                      TR1 = 1;
+  44   2                      FreCntTimeCnt--;
+  45   2                      if(FreCntTimeCnt == 0){
+  46   3                              FreCntTimeCnt = 1000;
+  47   3                              FreCntValue = getFreCnt();
+  48   3                      }
+  49   2              }
+  50   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     85    ----
+   CONSTANT SIZE    =   ----    ----
+C51 COMPILER V9.01   FRECOUNTER                                                            04/02/2017 12:20:52 PAGE 2   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

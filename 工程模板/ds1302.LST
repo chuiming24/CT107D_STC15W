@@ -1,0 +1,100 @@
+C51 COMPILER V9.01   DS1302                                                                04/02/2017 12:20:51 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE DS1302
+OBJECT MODULE PLACED IN ds1302.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE ds1302.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "ds1302.h"
+   2          /********************************************************************/ 
+   3          /*单字节写入一字节数据*/
+   4          void Write_Ds1302_Byte(unsigned char dat) 
+   5          {
+   6   1              unsigned char i;
+   7   1              SCK = 0;
+   8   1              for (i=0;i<8;i++) 
+   9   1              { 
+  10   2                      if (dat & 0x01)         // 等价于if((addr & 0x01) ==1) 
+  11   2                      {
+  12   3                              SDA_SET;                //#define SDA_SET SDA=1 /*电平置高*/
+  13   3                      }
+  14   2                      else 
+  15   2                      {
+  16   3                              SDA_CLR;                //#define SDA_CLR SDA=0 /*电平置低*/
+  17   3                      }                
+  18   2                      SCK_SET;
+  19   2                      SCK_CLR;                
+  20   2                      dat = dat >> 1; 
+  21   2              } 
+  22   1      }
+  23          /********************************************************************/ 
+  24          /*单字节读出一字节数据*/
+  25          unsigned char Read_Ds1302_Byte(void) 
+  26          {
+  27   1              unsigned char i, dat=0; 
+  28   1              for (i=0;i<8;i++)
+  29   1              {       
+  30   2                      dat = dat >> 1;
+  31   2                      if (SDA_R)        //等价于if(SDA_R==1)    #define SDA_R SDA /*电平读取*/        
+  32   2                      {
+  33   3                              dat |= 0x80;
+  34   3                      }
+  35   2                      else 
+  36   2                      {
+  37   3                              dat &= 0x7F;
+  38   3                      }
+  39   2                      SCK_SET;
+  40   2                      SCK_CLR;
+  41   2              }
+  42   1              return dat;
+  43   1      }
+  44          
+  45          /********************************************************************/ 
+  46          /*向DS1302 单字节写入一字节数据*/
+  47          void Ds1302_Single_Byte_Write(unsigned char addr, unsigned char dat)
+  48          { 
+  49   1      
+  50   1              RST_CLR;                        /*RST脚置低，实现DS1302的初始化*/
+  51   1              SCK_CLR;                        /*SCK脚置低，实现DS1302的初始化*/
+  52   1      
+  53   1              RST_SET;                        /*启动DS1302总线,RST=1电平置高 */
+  54   1              addr = addr & 0xFE;      
+  55   1              Write_Ds1302_Byte(addr); /*写入目标地址：addr,保证是写操作,写之前将最低位置零*/ 
+C51 COMPILER V9.01   DS1302                                                                04/02/2017 12:20:51 PAGE 2   
+
+  56   1              Write_Ds1302_Byte(dat);  /*写入数据：dat*/
+  57   1              RST_CLR;                                 /*停止DS1302总线*/
+  58   1      }
+  59          
+  60          /********************************************************************/ 
+  61          /*从DS1302单字节读出一字节数据*/
+  62          unsigned char Ds1302_Single_Byte_Read(unsigned char addr) 
+  63          { 
+  64   1              unsigned char temp;
+  65   1              RST_CLR;                        /*RST脚置低，实现DS1302的初始化*/
+  66   1              SCK_CLR;                        /*SCK脚置低，实现DS1302的初始化*/
+  67   1      
+  68   1              RST_SET;        /*启动DS1302总线,RST=1电平置高 */       
+  69   1              addr = addr | 0x01;      
+  70   1              Write_Ds1302_Byte(addr); /*写入目标地址：addr,保证是读操作,写之前将最低位置高*/
+  71   1              temp=Read_Ds1302_Byte(); /*从DS1302中读出一个字节的数据*/
+  72   1              SDA_CLR;                
+  73   1              RST_CLR;        /*停止DS1302总线*/
+  74   1              return temp;
+  75   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     98    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

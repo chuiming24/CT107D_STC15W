@@ -1,0 +1,144 @@
+C51 COMPILER V9.01   IIC                                                                   04/02/2017 12:20:51 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE IIC
+OBJECT MODULE PLACED IN iic.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE iic.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2            程序说明: IIC总线驱动程序
+   3            软件环境: Keil uVision 4.10 
+   4            硬件环境: CT107单片机综合实训平台(12MHz)
+   5            日    期: 2011-8-9
+   6          */
+   7          
+   8          #include "iic.h"
+   9          
+  10          void Delay5us()         //@11.0592MHz
+  11          {
+  12   1              unsigned char i;
+  13   1      
+  14   1              _nop_();
+  15   1              i = 11;
+  16   1              while (--i);
+  17   1      }
+  18          
+  19          //总线启动条件
+  20          void IIC_Start(void)
+  21          {
+  22   1              SDA = 1;
+  23   1              SCL = 1;
+  24   1              somenop;
+  25   1              SDA = 0;
+  26   1              somenop;
+  27   1              SCL = 0;        
+  28   1      }
+  29          
+  30          //总线停止条件
+  31          void IIC_Stop(void)
+  32          {
+  33   1              SDA = 0;
+  34   1              SCL = 1;
+  35   1              somenop;
+  36   1              SDA = 1;
+  37   1      }
+  38          
+  39          //应答位控制
+  40          void IIC_Ack(unsigned char ackbit)
+  41          {
+  42   1              if(ackbit) 
+  43   1              {       
+  44   2                      SDA = 0;
+  45   2              }
+  46   1              else 
+  47   1              {
+  48   2                      SDA = 1;
+  49   2              }
+  50   1              somenop;
+  51   1              SCL = 1;
+  52   1              somenop;
+  53   1              SCL = 0;
+  54   1              SDA = 1; 
+  55   1              somenop;
+C51 COMPILER V9.01   IIC                                                                   04/02/2017 12:20:51 PAGE 2   
+
+  56   1      }
+  57          
+  58          //等待应答
+  59          bit IIC_WaitAck(void)
+  60          {
+  61   1              SDA = 1;
+  62   1              somenop;
+  63   1              SCL = 1;
+  64   1              somenop;
+  65   1              if(SDA)    
+  66   1              {   
+  67   2                      SCL = 0;
+  68   2                      IIC_Stop();
+  69   2                      return 0;
+  70   2              }
+  71   1              else  
+  72   1              { 
+  73   2                      SCL = 0;
+  74   2                      return 1;
+  75   2              }
+  76   1      }
+  77          
+  78          //通过I2C总线发送数据
+  79          void IIC_SendByte(unsigned char byt)
+  80          {
+  81   1              unsigned char i;
+  82   1              for(i=0;i<8;i++)
+  83   1              {   
+  84   2                      if(byt&0x80) 
+  85   2                      {       
+  86   3                              SDA = 1;
+  87   3                      }
+  88   2                      else 
+  89   2                      {
+  90   3                              SDA = 0;
+  91   3                      }
+  92   2                      somenop;
+  93   2                      SCL = 1;
+  94   2                      byt <<= 1;
+  95   2                      somenop;
+  96   2                      SCL = 0;
+  97   2              }
+  98   1      }
+  99          
+ 100          //从I2C总线上接收数据
+ 101          unsigned char IIC_RecByte(void)
+ 102          {
+ 103   1              unsigned char da;
+ 104   1              unsigned char i;
+ 105   1              
+ 106   1              for(i=0;i<8;i++)
+ 107   1              {   
+ 108   2                      SCL = 1;
+ 109   2                      somenop;
+ 110   2                      da <<= 1;
+ 111   2                      if(SDA) 
+ 112   2                      da |= 0x01;
+ 113   2                      SCL = 0;
+ 114   2                      somenop;
+ 115   2              }
+ 116   1              return da;
+ 117   1      }
+C51 COMPILER V9.01   IIC                                                                   04/02/2017 12:20:51 PAGE 3   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    141    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

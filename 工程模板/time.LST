@@ -1,0 +1,63 @@
+C51 COMPILER V9.01   TIME                                                                  04/02/2017 12:20:52 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TIME
+OBJECT MODULE PLACED IN time.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE time.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <config.h>
+   2          #include <ds1302.h>
+   3          #include <time.h>
+   4          
+   5          
+   6          uchar data time_data[]={16,0,3,6,23,44,58};
+   7          uchar data addr[]={0x8c,0x8a,0x88,0x86,0x84,0x82,0x80};
+   8          /********************************************************************/ 
+   9          /*BCD转化为十进制*/
+  10          uchar BCD2Num(uchar BCD){
+  11   1              uchar i, j, dec;
+  12   1              i = BCD % 16;
+  13   1              j = (BCD >> 4) * 10;
+  14   1              dec = i + j;
+  15   1              return dec;
+  16   1      }
+  17          
+  18          /********************************************************************/ 
+  19          /*初始化并写入年星月日时分秒*/
+  20          void set_rtc(void){     
+  21   1              uchar i,j;
+  22   1              for(i = 0; i < 7; i++){
+  23   2                      j=time_data[i]/10;
+  24   2                      time_data[i]=time_data[i]%10;
+  25   2                      time_data[i]=time_data[i]+j*16;
+  26   2              }
+  27   1              Ds1302_Single_Byte_Write(0x8e,0x00);   //去除写保护
+  28   1          for(i = 0; i < 7; i++){
+  29   2                      Ds1302_Single_Byte_Write(addr[i],time_data[i]);
+  30   2              }
+  31   1              Ds1302_Single_Byte_Write(0x8e,0x80);   //加写保护
+  32   1      }
+  33          
+  34          /**************读数据年周月日时分秒数据****************************/
+  35          void read_rtc(void){
+  36   1              uchar i;
+  37   1              for(i=0;i<7;i++){
+  38   2              time_data[i]=BCD2Num(Ds1302_Single_Byte_Read(addr[i]+1));
+  39   2              }
+  40   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    134    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

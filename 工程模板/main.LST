@@ -1,0 +1,71 @@
+C51 COMPILER V9.01   MAIN                                                                  04/02/2017 12:20:50 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <config.h>
+   2          #include <init.h>
+   3          #include <exti.h>
+   4          #include <display.h>
+   5          #include <key.h>
+   6          #include <at24c02.h>
+   7          #include <ds18b20.h>
+   8          #include <time.h>
+   9          #include <frecounter.h>
+  10                                                                                   
+  11          uint temp;
+  12          
+  13          void main(){
+  14   1              gpio();                                 //初始化针脚
+  15   1              P0 = 0xff;setY4;
+  16   1              P0 = 0x00;setY5;
+  17   1              Timer0Init();                   //初始化计数器0 用于计数
+  18   1              FreCntInit();
+  19   1              EA = 1;
+  20   1              ET0 = 1;
+  21   1              dspbuf[1] = EEPROM_Read(0x00);
+  22   1              set_rtc();
+  23   1              OpenFreCnt();
+  24   1              while(1){
+  25   2                      if(TextKey()){
+  26   3                               dspbuf[0] = GetKey();
+  27   3                      }
+  28   2      
+  29   2      
+  30   2                      if(SoftTimer1Cnt == 0) SoftTimer1Cnt = 500;
+  31   2                      if(_testbit_(SoftTimer1Over))
+  32   2      
+  33   2                      {
+  34   3                              read_rtc();
+  35   3                              dspbuf[2] = time_data[5]/10%10;
+  36   3                              dspbuf[3] = time_data[5]%10;
+  37   3                      }
+  38   2      
+  39   2                      temp = getFreCntValue();                
+  40   2                      dspbuf[4] = temp /1000 %10;
+  41   2                      dspbuf[5] = temp /100 %10; 
+  42   2                      dspbuf[6] = temp /10 %10;
+  43   2                      dspbuf[7] = temp %10;
+  44   2              }
+  45   1      }
+  46          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    216    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   MAIN                                                                  04/02/2017 12:20:50 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

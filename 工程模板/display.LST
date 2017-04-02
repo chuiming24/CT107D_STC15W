@@ -1,0 +1,60 @@
+C51 COMPILER V9.01   DISPLAY                                                               04/02/2017 12:20:51 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE DISPLAY
+OBJECT MODULE PLACED IN display.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE display.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <config.h>
+   2          #include <display.h>
+   3          
+   4          
+   5          
+   6          
+   7          code uchar table[] = {0xc0,0xf9,0xa4,0xb0,
+   8                                                   0x99,0x92,0x82,0xf8,
+   9                                                   0x80,0x90,0x88,0x83,
+  10                                                   0xc6,0xa1,0x86,0x8e,
+  11                                                   0x40,0x79,0x24,0x30,
+  12                                                   0x19,0x12,0x02,0x78,
+  13                                                   0x00,0x10,0x08,0x03,
+  14                                                   0x46,0x21,0x06,0x0e,
+  15                                                   0xff,0xbf};
+  16          uchar dspbuf[] = {32, 32, 32, 32, 32, 32, 32, 1};
+  17          uchar dspcom = 0;
+  18          
+  19          /*/////////////////////////////////////////////
+  20          函数名：        display
+  21          输入值：        无
+  22          返回值：        无
+  23          备注  ：        动态显示函数，2ms运行一次最为稳定
+  24          **********************************************/
+  25          void display(void){
+  26   1              P0 = 0x00;
+  27   1              setY6;
+  28   1              P0 = table[dspbuf[dspcom]];
+  29   1              setY7;
+  30   1              P0 = (1<<dspcom);
+  31   1              setY6;
+  32   1      
+  33   1              dspcom++;
+  34   1              if(dspcom == 8){
+  35   2                      dspcom = 0;
+  36   2              }               
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     80    ----
+   CONSTANT SIZE    =     34    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
