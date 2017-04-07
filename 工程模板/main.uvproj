@@ -406,6 +406,16 @@
               <FileType>1</FileType>
               <FilePath>.\frecounter.c</FilePath>
             </File>
+            <File>
+              <FileName>usar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\usar.c</FilePath>
+            </File>
+            <File>
+              <FileName>wave.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\wave.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

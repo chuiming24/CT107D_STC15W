@@ -9,6 +9,8 @@
 "delay.obj",
 "ds18B20.obj",
 "time.obj",
-"frecounter.obj" 
+"frecounter.obj",
+"usar.obj",
+"wave.obj" 
 TO "main" 
 RAMSIZE(256) 

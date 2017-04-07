@@ -9,6 +9,7 @@
 #include <frecounter.h>
 									 
 uint temp;
+uchar temp1;
 
 void main(){
 	gpio();					//≥ı ºªØ’ÎΩ≈
@@ -23,7 +24,9 @@ void main(){
 	OpenFreCnt();
 	while(1){
 		if(TextKey()){
-			 dspbuf[0] = GetKey();
+			 temp1 = GetKey();
+			 dspbuf[0] = temp1;
+			 EEPROM_Write(0x00, temp1);
 		}
 
 

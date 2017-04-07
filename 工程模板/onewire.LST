@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   ONEWIRE                                                               04/02/2017 12:20:51 PAGE 1   
+C51 COMPILER V9.01   ONEWIRE                                                               04/07/2017 11:35:02 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE ONEWIRE
@@ -62,7 +62,7 @@ line level    source
   53          unsigned char Read_DS18B20(void)
   54          {
   55   1              unsigned char i;
-C51 COMPILER V9.01   ONEWIRE                                                               04/02/2017 12:20:51 PAGE 2   
+C51 COMPILER V9.01   ONEWIRE                                                               04/07/2017 11:35:02 PAGE 2   
 
   56   1              unsigned char dat;
   57   1        

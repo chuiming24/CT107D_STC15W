@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   DS1302                                                                04/02/2017 12:20:51 PAGE 1   
+C51 COMPILER V9.01   DS1302                                                                04/07/2017 11:35:02 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE DS1302
@@ -62,7 +62,7 @@ line level    source
   53   1              RST_SET;                        /*启动DS1302总线,RST=1电平置高 */
   54   1              addr = addr & 0xFE;      
   55   1              Write_Ds1302_Byte(addr); /*写入目标地址：addr,保证是写操作,写之前将最低位置零*/ 
-C51 COMPILER V9.01   DS1302                                                                04/02/2017 12:20:51 PAGE 2   
+C51 COMPILER V9.01   DS1302                                                                04/07/2017 11:35:02 PAGE 2   
 
   56   1              Write_Ds1302_Byte(dat);  /*写入数据：dat*/
   57   1              RST_CLR;                                 /*停止DS1302总线*/
