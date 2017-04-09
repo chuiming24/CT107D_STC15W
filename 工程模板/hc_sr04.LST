@@ -1,0 +1,74 @@
+C51 COMPILER V9.01   HC_SR04                                                               04/09/2017 13:49:41 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE HC_SR04
+OBJECT MODULE PLACED IN hc_sr04.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE hc_sr04.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <config.h>
+   2          #include <hc_sr04.h>
+   3          
+   4          sbit tx = P1^0;
+   5          sbit rx = P1^1;
+   6          
+   7          void Hcsr04Init_Timer1(void)
+   8          {
+   9   1              TMOD |= 0x10;
+  10   1              TH1 = TL1 = 0;
+  11   1      }
+  12          
+  13          void Delay14us()                //@11.0592MHz
+  14          {
+  15   1              unsigned char i;
+  16   1      
+  17   1              _nop_();
+  18   1              i = 36;
+  19   1              while (--i);
+  20   1      }
+  21          
+  22          void SendWave(){
+  23   1              tx = 0;
+  24   1              tx = 1;
+  25   1              Delay14us();
+  26   1              tx = 0;
+  27   1              while(!tx);
+  28   1      }
+  29          
+  30          uint GetDistance(){
+  31   1              uint Distance;
+  32   1              rx = 0;
+  33   1              SendWave();
+  34   1              TR1 = 1;        
+  35   1              while(rx && !TF1);
+  36   1              TR1 = 0;
+  37   1              if(TF1 == 1){
+  38   2                      TF1 = 0;
+  39   2                      Distance = 65535;
+  40   2              }else{
+  41   2                      Distance = TH1;
+  42   2                      Distance <<= 8;
+  43   2                      Distance |= TL1;
+  44   2                      Distance = Distance * 0.17;     //·Å´ó1000±¶            
+  45   2              }
+  46   1              TH1 = TL1 = 0;
+  47   1              return Distance;
+  48   1      }
+  49          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     96    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   HC_SR04                                                               04/09/2017 13:49:41 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
