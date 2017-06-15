@@ -1,0 +1,95 @@
+C51 COMPILER V9.00   MAIN                                                                  06/15/2017 16:37:46 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\keil4\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          bit Send_ed = 1;
+   3          bit New_rec = 1;
+   4          char xdata Rec_data[25] = {0};
+   5          char Rec_data_down = 0;
+   6          
+   7          void UartInit(void)             //9600bps@11.0592MHz
+   8          {
+   9   1              SCON = 0x50;            //8位数据,可变波特率
+  10   1              AUXR &= 0xBF;           //定时器1时钟为Fosc/12,即12T
+  11   1              AUXR &= 0xFE;           //串口1选择定时器1为波特率发生器
+  12   1              TMOD &= 0x0F;           //设定定时器1为16位自动重装方式
+  13   1              TL1 = 0xE8;             //设定定时初值
+  14   1              TH1 = 0xFF;             //设定定时初值
+  15   1              ET1 = 0;                //禁止定时器1中断
+  16   1              TR1 = 1;                //启动定时器1
+  17   1      }
+  18          char SendData(char dat){
+  19   1              if(Send_ed == 1){
+  20   2                      Send_ed = 0;
+  21   2                      SBUF = dat;     
+  22   2                      return 1;       
+  23   2              }
+  24   1              return 0;
+  25   1      }
+  26          
+  27          void SendString(char *s){
+  28   1              s++;s++;
+  29   1              while(*s){
+  30   2                      if(SendData(*s) == 1){
+  31   3                              s++;
+  32   3                      }
+  33   2              }
+  34   1      }
+  35          
+  36          void main(){
+  37   1              UartInit();
+  38   1              ES = 1;
+  39   1              EA = 1;
+  40   1              while(1){
+  41   2                      if(New_rec == 1){
+  42   3                              New_rec = 0;
+  43   3                              SendString(Rec_data);
+  44   3                      }
+  45   2              }
+  46   1      }
+  47          
+  48          void ser() interrupt 4{
+  49   1              if(TI){
+  50   2                      TI = 0;
+  51   2                      Send_ed = 1;
+  52   2              }
+  53   1              if(RI){
+  54   2                      RI = 0;
+  55   2                      Rec_data[Rec_data_down] = SBUF;
+C51 COMPILER V9.00   MAIN                                                                  06/15/2017 16:37:46 PAGE 2   
+
+  56   2                      if(Rec_data_down == 0 && Rec_data[Rec_data_down] == 'A'){
+  57   3                              Rec_data_down = 1;
+  58   3                      }else if(Rec_data_down == 1 && Rec_data[Rec_data_down] == 'T'){
+  59   3                              Rec_data_down = 2;
+  60   3                      }else if(Rec_data_down >= 2 && Rec_data[Rec_data_down] != 'Q'){
+  61   3                              Rec_data_down++;
+  62   3                      }else if(Rec_data[Rec_data_down] == 'Q'){
+  63   3                              Rec_data[Rec_data_down] = '\0';
+  64   3                              Rec_data_down = 0;
+  65   3                              New_rec = 1;
+  66   3                      }else{
+  67   3                              Rec_data_down = 0;      
+  68   3                      }               
+  69   2              }
+  70   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    282    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     25    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
