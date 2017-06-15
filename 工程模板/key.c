@@ -151,6 +151,54 @@ uchar read_keyboard(void)
     return 0xff;  //无按键按下或被按下的按键未被释放 
 }
 
+//3*4矩阵键盘
+uchar read_keyboard(void)
+{
+    static unsigned char col;
+    
+	P3 &= ~0x0f;
+	P35 = 1;
+	P42 = 1; 
+	P44 = 1;    
+	if(!key_re)
+	{
+	    if((P35 == 0)||(P42 == 0)||(P44 == 0)) //有按键按下
+	        keyPress++;
+		else
+			keyPress = 0;  //抖动
+	    
+	    if(keyPress == 3)
+	    {
+			keyPress = 0;
+			key_re = 1;
+			
+			if(P44 == 0)			col = 1;
+			if(P42 == 0)			col = 2;
+			if(P35 == 0)			col = 3;
+	//		if(P34 == 0)			col = 4;
+	        
+	        P3 = P3|0x0f; P35 = 0; P42 = 0; P44 = 0;
+	
+	
+			if(P30 == 0)	keyValue = (col-1);
+			if(P31 == 0)	keyValue = (col+3);
+			if(P32 == 0)	keyValue = (col+7);
+			if(P33 == 0)	keyValue = (col+11);
+	    }
+    }
+	else if(key_re == 1 &&	!(P35 == 0)||(P42 == 0)||(P44 == 0))
+    {
+        key_re = 0;
+        return keyValue;
+    }
+
+
+    return 0xff;  //无按键按下或被按下的按键未被释放 
+}
+
+
+
+
 
 void KeyScan(){
 	KeyTimeCnt--;

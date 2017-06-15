@@ -224,7 +224,7 @@
       <Focus>0</Focus>
       <ColumnNumber>30</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
+      <TopLine>4</TopLine>
       <CurrentLine>19</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\main.c</PathWithFileName>
@@ -278,10 +278,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>6</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>91</TopLine>
+      <CurrentLine>91</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\iic.c</PathWithFileName>
       <FilenameWithoutPath>iic.c</FilenameWithoutPath>
@@ -351,7 +351,7 @@
       <ColumnNumber>19</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>1</TopLine>
-      <CurrentLine>2</CurrentLine>
+      <CurrentLine>19</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ds18B20.c</PathWithFileName>
       <FilenameWithoutPath>ds18B20.c</FilenameWithoutPath>
@@ -376,31 +376,31 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2</ColumnNumber>
+      <ColumnNumber>21</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>17</TopLine>
-      <CurrentLine>24</CurrentLine>
+      <TopLine>4</TopLine>
+      <CurrentLine>4</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\frecounter.c</PathWithFileName>
       <FilenameWithoutPath>frecounter.c</FilenameWithoutPath>
     </File>
     <File>
       <GroupNumber>1</GroupNumber>
-      <FileNumber>0</FileNumber>
+      <FileNumber>13</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>14</ColumnNumber>
+      <ColumnNumber>17</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>2</CurrentLine>
+      <TopLine>16</TopLine>
+      <CurrentLine>20</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\usar.c</PathWithFileName>
       <FilenameWithoutPath>usar.c</FilenameWithoutPath>
     </File>
     <File>
       <GroupNumber>1</GroupNumber>
-      <FileNumber>0</FileNumber>
+      <FileNumber>14</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -415,7 +415,7 @@
   </Group>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\FRECOUNTER.H</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\FRECOUNTER.H</PathWithFilename>
     <TopLine>1</TopLine>
     <CurrentLine>5</CurrentLine>
     <Constant>0</Constant>
@@ -441,7 +441,7 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\TIME.H</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\TIME.H</PathWithFilename>
     <TopLine>1</TopLine>
     <CurrentLine>5</CurrentLine>
     <Constant>0</Constant>
@@ -467,7 +467,7 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\KEY.H</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\KEY.H</PathWithFilename>
     <TopLine>1</TopLine>
     <CurrentLine>7</CurrentLine>
     <Constant>0</Constant>
@@ -493,9 +493,9 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\CONFIG.H</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\CONFIG.H</PathWithFilename>
     <TopLine>1</TopLine>
-    <CurrentLine>1</CurrentLine>
+    <CurrentLine>11</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -519,7 +519,7 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\EXTI.H</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\EXTI.H</PathWithFilename>
     <TopLine>1</TopLine>
     <CurrentLine>22</CurrentLine>
     <Constant>0</Constant>
@@ -545,7 +545,7 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\DS1302.H</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\DS1302.H</PathWithFilename>
     <TopLine>28</TopLine>
     <CurrentLine>32</CurrentLine>
     <Constant>0</Constant>
@@ -571,7 +571,7 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\DS18B20.H</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\DS18B20.H</PathWithFilename>
     <TopLine>1</TopLine>
     <CurrentLine>1</CurrentLine>
     <Constant>0</Constant>
@@ -597,9 +597,9 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\wave.h</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\USAR.H</PathWithFilename>
     <TopLine>1</TopLine>
-    <CurrentLine>3</CurrentLine>
+    <CurrentLine>6</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -623,9 +623,9 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>C:\Users\hasee\Documents\CT107D_STC15W\工程模板\usar.h</PathWithFilename>
+    <PathWithFilename>C:\Users\Administrator\Documents\CT107D_STC15W\工程模板\WAVE.H</PathWithFilename>
     <TopLine>1</TopLine>
-    <CurrentLine>6</CurrentLine>
+    <CurrentLine>3</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1989,8 +1989,44 @@
     <ActiveMDIGroup>0</ActiveMDIGroup>
     <MDIGroup>
       <Size>100</Size>
-      <ActiveTab>18</ActiveTab>
+      <ActiveTab>0</ActiveTab>
       <Documents>
+        <Doc>
+          <Name>.\iic.c</Name>
+          <ColumnNumber>6</ColumnNumber>
+          <TopLine>91</TopLine>
+          <CurrentLine>91</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>.\ds18B20.c</Name>
+          <ColumnNumber>19</ColumnNumber>
+          <TopLine>1</TopLine>
+          <CurrentLine>19</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>EXTI.H</Name>
+          <ColumnNumber>14</ColumnNumber>
+          <TopLine>1</TopLine>
+          <CurrentLine>22</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>CONFIG.H</Name>
+          <ColumnNumber>27</ColumnNumber>
+          <TopLine>1</TopLine>
+          <CurrentLine>11</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>.\frecounter.c</Name>
+          <ColumnNumber>21</ColumnNumber>
+          <TopLine>4</TopLine>
+          <CurrentLine>4</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>.\usar.c</Name>
+          <ColumnNumber>17</ColumnNumber>
+          <TopLine>16</TopLine>
+          <CurrentLine>20</CurrentLine>
+        </Doc>
         <Doc>
           <Name>.\wave.c</Name>
           <ColumnNumber>18</ColumnNumber>
@@ -2010,15 +2046,9 @@
           <CurrentLine>6</CurrentLine>
         </Doc>
         <Doc>
-          <Name>.\ds18B20.c</Name>
-          <ColumnNumber>19</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>2</CurrentLine>
-        </Doc>
-        <Doc>
           <Name>.\main.c</Name>
           <ColumnNumber>30</ColumnNumber>
-          <TopLine>1</TopLine>
+          <TopLine>4</TopLine>
           <CurrentLine>19</CurrentLine>
         </Doc>
         <Doc>
@@ -2058,18 +2088,6 @@
           <CurrentLine>38</CurrentLine>
         </Doc>
         <Doc>
-          <Name>EXTI.H</Name>
-          <ColumnNumber>14</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>22</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>CONFIG.H</Name>
-          <ColumnNumber>0</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>1</CurrentLine>
-        </Doc>
-        <Doc>
           <Name>KEY.H</Name>
           <ColumnNumber>9</ColumnNumber>
           <TopLine>1</TopLine>
@@ -2092,18 +2110,6 @@
           <ColumnNumber>15</ColumnNumber>
           <TopLine>1</TopLine>
           <CurrentLine>5</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>.\frecounter.c</Name>
-          <ColumnNumber>2</ColumnNumber>
-          <TopLine>17</TopLine>
-          <CurrentLine>24</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>.\usar.c</Name>
-          <ColumnNumber>14</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>2</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>
