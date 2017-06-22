@@ -1,0 +1,5 @@
+"text.obj",
+"usart.obj",
+"stc15_usart.obj" 
+TO "text" 
+RAMSIZE(256) 

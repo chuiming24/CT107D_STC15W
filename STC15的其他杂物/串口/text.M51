@@ -1,0 +1,278 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/22/2017  19:14:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL4\C51\BIN\BL51.EXE text.obj, usart.obj, stc15_usart.obj TO text RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  text.obj (TEXT)
+  usart.obj (USART)
+  stc15_usart.obj (STC15_USART)
+  D:\KEIL4\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL4\C51\LIB\C51S.LIB (?C?CLDPTR)
+  D:\KEIL4\C51\LIB\C51S.LIB (?C?STRCPY)
+  D:\KEIL4\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  text (TEXT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         _DATA_GROUP_
+                    000BH     0015H                  *** GAP ***
+            BIT     0020H.0   0000H.2   UNIT         ?BI?USART
+                    0020H.2   0000H.6                *** GAP ***
+            DATA    0021H     0033H     UNIT         ?DT?USART
+            IDATA   0054H     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     0019H     UNIT         ?XD?USART
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0017H     UNIT         ?PR?UARTINIT?STC15_USART
+            CODE    001AH     0009H     UNIT         ?CO?TEXT
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     0102H     UNIT         ?C?LIB_CODE
+            CODE    0128H     009CH     UNIT         ?PR?_REVDATA?USART
+            CODE    01C4H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0250H     0066H     UNIT         ?C_INITSEG
+            CODE    02B6H     0049H     UNIT         ?PR?SER?STC15_USART
+            CODE    02FFH     003BH     UNIT         ?PR?MAIN?TEXT
+            CODE    033AH     0026H     UNIT         ?PR?_SENDSTRING?USART
+            CODE    0360H     000DH     UNIT         ?PR?_SENDDATA?STC15_USART
+
+
+
+OVERLAY MAP OF MODULE:   text (TEXT)
+
+
+SEGMENT                             DATA_GROUP 
+  +--> CALLED SEGMENT             START    LENGTH
+-------------------------------------------------
+?PR?SER?STC15_USART               -----    -----
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/22/2017  19:14:58  PAGE 2
+
+
+  +--> ?PR?_REVDATA?USART
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                     -----    -----
+  +--> ?PR?MAIN?TEXT
+  +--> ?C_INITSEG
+
+?PR?MAIN?TEXT                     -----    -----
+  +--> ?PR?UARTINIT?STC15_USART
+  +--> ?CO?TEXT
+  +--> ?PR?_SENDSTRING?USART
+
+?PR?_SENDSTRING?USART             0008H    0003H
+  +--> ?PR?_SENDDATA?STC15_USART
+
+
+
+SYMBOL TABLE OF MODULE:  text (TEXT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TEXT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  B:00A8H.7       PUBLIC        EA
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  D:00A8H         PUBLIC        IE
+  B:00A8H.4       PUBLIC        ES
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  C:02FFH         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:02FFH         LINE#         4
+  C:02FFH         LINE#         5
+  C:0302H         LINE#         6
+  C:0304H         LINE#         7
+  C:0306H         LINE#         8
+  C:0315H         LINE#         9
+  C:0318H         LINE#         10
+  C:0327H         LINE#         11
+  C:032AH         LINE#         12
+  C:032AH         LINE#         13
+  C:032DH         LINE#         14
+  C:032FH         LINE#         15
+  C:0338H         LINE#         16
+  C:0338H         LINE#         17
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/22/2017  19:14:58  PAGE 3
+
+
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TEXT
+
+  -------         MODULE        USART
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:033AH         PUBLIC        _SendString
+  D:0021H         PUBLIC        ustDataDownDown
+  X:0000H         PUBLIC        Rec_data
+  D:0022H         PUBLIC        Rec_data_down
+  B:0020H.0       PUBLIC        Send_ed
+  D:0023H         PUBLIC        down
+  B:0020H.1       PUBLIC        New_rec
+  C:0128H         PUBLIC        _revData
+  D:002DH         PUBLIC        downLoog
+  D:002EH         PUBLIC        ustData
+  D:0047H         PUBLIC        up
+  D:0051H         PUBLIC        ustData_down
+  D:0052H         PUBLIC        upLoog
+  D:0053H         PUBLIC        ustStat
+  -------         PROC          _SENDSTRING
+  D:0008H         SYMBOL        s
+  C:033AH         LINE#         18
+  C:0340H         LINE#         19
+  C:034CH         LINE#         20
+  C:0352H         LINE#         21
+  C:035DH         LINE#         22
+  C:035DH         LINE#         23
+  C:035FH         LINE#         24
+  -------         ENDPROC       _SENDSTRING
+  -------         PROC          _REVDATA
+  D:0007H         SYMBOL        a
+  C:0128H         LINE#         25
+  C:0128H         LINE#         26
+  C:013BH         LINE#         27
+  C:0146H         LINE#         28
+  C:0146H         LINE#         29
+  C:016AH         LINE#         30
+  C:016CH         LINE#         31
+  C:016EH         LINE#         32
+  C:0171H         LINE#         33
+  C:0171H         LINE#         34
+  C:0177H         LINE#         35
+  C:017AH         LINE#         36
+  C:017AH         LINE#         37
+  C:017BH         LINE#         38
+  C:017BH         LINE#         40
+  C:0199H         LINE#         41
+  C:019BH         LINE#         42
+  C:019DH         LINE#         43
+  C:01A0H         LINE#         44
+  C:01A0H         LINE#         45
+  C:01A5H         LINE#         47
+  C:01A8H         LINE#         48
+  C:01AAH         LINE#         49
+  C:01ACH         LINE#         50
+  C:01AEH         LINE#         52
+  C:01B5H         LINE#         54
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/22/2017  19:14:58  PAGE 4
+
+
+  C:01B7H         LINE#         55
+  C:01B8H         LINE#         56
+  C:01B8H         LINE#         58
+  C:01BFH         LINE#         59
+  C:01C1H         LINE#         60
+  C:01C3H         LINE#         61
+  C:01C3H         LINE#         62
+  C:01C3H         LINE#         63
+  -------         ENDPROC       _REVDATA
+  -------         ENDMOD        USART
+
+  -------         MODULE        STC15_USART
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  C:0360H         PUBLIC        _SendData
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  D:00D8H         PUBLIC        CCON
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  C:0003H         PUBLIC        UartInit
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:008EH         PUBLIC        AUXR
+  B:00A8H.3       PUBLIC        ET1
+  C:02B6H         PUBLIC        ser
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  B:0088H.6       PUBLIC        TR1
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          UARTINIT
+  C:0003H         LINE#         8
+  C:0003H         LINE#         9
+  C:0003H         LINE#         10
+  C:0006H         LINE#         11
+  C:0009H         LINE#         12
+  C:000CH         LINE#         13
+  C:000FH         LINE#         14
+  C:0012H         LINE#         15
+  C:0015H         LINE#         16
+  C:0017H         LINE#         17
+  C:0019H         LINE#         18
+  -------         ENDPROC       UARTINIT
+  -------         PROC          _SENDDATA
+  D:0007H         SYMBOL        dat
+  C:0360H         LINE#         19
+  C:0360H         LINE#         20
+  C:0363H         LINE#         21
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/22/2017  19:14:58  PAGE 5
+
+
+  C:0365H         LINE#         22
+  C:0367H         LINE#         23
+  C:036AH         LINE#         24
+  C:036AH         LINE#         25
+  C:036CH         LINE#         26
+  -------         ENDPROC       _SENDDATA
+  -------         PROC          SER
+  -------         DO            
+  D:0007H         SYMBOL        a
+  -------         ENDDO         
+  C:02B6H         LINE#         28
+  C:02D3H         LINE#         30
+  C:02D6H         LINE#         31
+  C:02D8H         LINE#         32
+  C:02DAH         LINE#         33
+  C:02DAH         LINE#         34
+  C:02DDH         LINE#         35
+  C:02DFH         LINE#         36
+  C:02E1H         LINE#         37
+  C:02E4H         LINE#         38
+  C:02E4H         LINE#         39
+  -------         ENDPROC       SER
+  -------         ENDMOD        STC15_USART
+
+  -------         MODULE        ?C?CLDPTR
+  C:0026H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?STRCPY
+  C:010BH         PUBLIC        ?C?STRCPY
+  -------         ENDMOD        ?C?STRCPY
+
+Program Size: data=63.2 xdata=25 code=877
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
