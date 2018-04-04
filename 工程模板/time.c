@@ -1,6 +1,6 @@
-#include <config.h>
-#include <ds1302.h>
-#include <time.h>
+#include "config.h"
+#include "ds1302.h"
+#include "time.h"
 
 
 uchar data time_data[]={16,0,3,6,23,44,58};

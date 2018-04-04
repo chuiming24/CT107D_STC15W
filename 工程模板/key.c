@@ -1,6 +1,6 @@
-#include <config.h>
-#include <key.h>
-#include <display.h>
+#include "config.h"
+#include "key.h"
+#include "display.h"
 
 uchar keyPress = 0;
 bit key_re;
@@ -29,7 +29,7 @@ uchar TextKey(){
 		return 1;
 }
 
-//4x4¼üÅÌ
+//4x4ï¿½ï¿½ï¿½ï¿½
 /*
 uchar read_keyboard(void)
 {
@@ -37,10 +37,10 @@ uchar read_keyboard(void)
     
 	P3 = 0xf0; P42 = 1; P44 = 1;
 
-    if((P3 != 0xf0)||(P42 == 0)||(P44 == 0)) //ÓÐ°´¼ü°´ÏÂ
+    if((P3 != 0xf0)||(P42 == 0)||(P44 == 0)) //ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         keyPress++;
 	else
-		keyPress = 0;  //¶¶¶¯
+		keyPress = 0;  //ï¿½ï¿½ï¿½ï¿½
     
     if(keyPress == 3)
     {
@@ -60,7 +60,7 @@ uchar read_keyboard(void)
 		if((P3&0x08) == 0)	keyValue = (col+11);
     }
     
-	//Á¬ÐøÈý´Î¼ì²âµ½°´¼ü±»°´ÏÂ£¬²¢ÇÒ¸Ã°´¼üÒÑ¾­ÊÍ·Å
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¼ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½Ò¸Ã°ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Í·ï¿½
 	P3 = 0x0f; P42 = 0; P44 = 0;
 	
     if(((key_re == 1) && (P3 == 0x0f))&&(P42 == 0)&&(P44 == 0))
@@ -69,11 +69,11 @@ uchar read_keyboard(void)
         return keyValue;
     }
     
-    return 0xff;  //ÎÞ°´¼ü°´ÏÂ»ò±»°´ÏÂµÄ°´¼üÎ´±»ÊÍ·Å 
+    return 0xff;  //ï¿½Þ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ò±»°ï¿½ï¿½ÂµÄ°ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Í·ï¿½ 
 }
 **/
 
-//¶ÀÁ¢°´¼ü 
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 /*
 uchar read_keyboard(void)
 {
@@ -104,7 +104,7 @@ uchar read_keyboard(void)
 }
 */
 
-//3*4¾ØÕó¼üÅÌ
+//3*4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 uchar read_keyboard(void)
 {
     static unsigned char col;
@@ -114,10 +114,10 @@ uchar read_keyboard(void)
 	P42 = 1; 
 	P44 = 1;
 
-    if((P35 == 0)||(P42 == 0)||(P44 == 0)) //ÓÐ°´¼ü°´ÏÂ
+    if((P35 == 0)||(P42 == 0)||(P44 == 0)) //ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         keyPress++;
 	else
-		keyPress = 0;  //¶¶¶¯
+		keyPress = 0;  //ï¿½ï¿½ï¿½ï¿½
     
     if(keyPress == 3)
     {
@@ -138,7 +138,7 @@ uchar read_keyboard(void)
 		if(P33 == 0)	keyValue = (col+11);
     }
     
-	//Á¬ÐøÈý´Î¼ì²âµ½°´¼ü±»°´ÏÂ£¬²¢ÇÒ¸Ã°´¼üÒÑ¾­ÊÍ·Å
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¼ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½Ò¸Ã°ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Í·ï¿½
 	P3 |= 0x0f; P35 = 0; P42 = 0; P44 = 0;
 
 		
@@ -148,10 +148,10 @@ uchar read_keyboard(void)
         return keyValue;
     }
     
-    return 0xff;  //ÎÞ°´¼ü°´ÏÂ»ò±»°´ÏÂµÄ°´¼üÎ´±»ÊÍ·Å 
+    return 0xff;  //ï¿½Þ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ò±»°ï¿½ï¿½ÂµÄ°ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Í·ï¿½ 
 }
 
-//3*4¾ØÕó¼üÅÌ
+//3*4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 uchar read_keyboard(void)
 {
     static unsigned char col;
@@ -162,10 +162,10 @@ uchar read_keyboard(void)
 	P44 = 1;    
 	if(!key_re)
 	{
-	    if((P35 == 0)||(P42 == 0)||(P44 == 0)) //ÓÐ°´¼ü°´ÏÂ
+	    if((P35 == 0)||(P42 == 0)||(P44 == 0)) //ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	        keyPress++;
 		else
-			keyPress = 0;  //¶¶¶¯
+			keyPress = 0;  //ï¿½ï¿½ï¿½ï¿½
 	    
 	    if(keyPress == 3)
 	    {
@@ -193,7 +193,7 @@ uchar read_keyboard(void)
     }
 
 
-    return 0xff;  //ÎÞ°´¼ü°´ÏÂ»ò±»°´ÏÂµÄ°´¼üÎ´±»ÊÍ·Å 
+    return 0xff;  //ï¿½Þ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ò±»°ï¿½ï¿½ÂµÄ°ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Í·ï¿½ 
 }
 
 

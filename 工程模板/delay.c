@@ -1,4 +1,4 @@
-#include <config.h>
+#include "config.h"
 #include "delay.h"
 
 void Delay_ms(uint z)

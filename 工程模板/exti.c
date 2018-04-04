@@ -1,8 +1,8 @@
-#include <config.h>
-#include <exti.h>
-#include <display.h>
-#include <key.h>
-#include <frecounter.h>
+#include "config.h"
+#include "exti.h"
+#include "display.h"
+#include "key.h"
+#include "frecounter.h"
 
 
 uint SoftTimer0Cnt = 0;
@@ -20,14 +20,14 @@ bit SoftTimer3Over = 0;
 uint SoftTimer4Cnt = 0;
 bit SoftTimer4Over = 0;
 
-void Timer0Init(void)		//1ºÁÃë@12.000MHz
+void Timer0Init(void)		//1ï¿½ï¿½ï¿½ï¿½@12.000MHz
 {
-	AUXR |= 0x80;		//¶¨Ê±Æ÷Ê±ÖÓ1TÄ£Ê½
-	TMOD &= 0xF0;		//ÉèÖÃ¶¨Ê±Æ÷Ä£Ê½
-	TL0 = 0x20;		//ÉèÖÃ¶¨Ê±³õÖµ
-	TH0 = 0xD1;		//ÉèÖÃ¶¨Ê±³õÖµ
-	TF0 = 0;		//Çå³ýTF0±êÖ¾
-	TR0 = 1;		//¶¨Ê±Æ÷0¿ªÊ¼¼ÆÊ± 
+	AUXR |= 0x80;		//ï¿½ï¿½Ê±ï¿½ï¿½Ê±ï¿½ï¿½1TÄ£Ê½
+	TMOD &= 0xF0;		//ï¿½ï¿½ï¿½Ã¶ï¿½Ê±ï¿½ï¿½Ä£Ê½
+	TL0 = 0x20;		//ï¿½ï¿½ï¿½Ã¶ï¿½Ê±ï¿½ï¿½Öµ
+	TH0 = 0xD1;		//ï¿½ï¿½ï¿½Ã¶ï¿½Ê±ï¿½ï¿½Öµ
+	TF0 = 0;		//ï¿½ï¿½ï¿½TF0ï¿½ï¿½Ö¾
+	TR0 = 1;		//ï¿½ï¿½Ê±ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½Ê± 
 }
 
 
@@ -37,31 +37,31 @@ void time0_isr() interrupt 1{
 	KeyScan();
 	FreCntScan();
 
-	if(SoftTimer0Cnt)		 //Èí¼þ¶¨Ê±Æ÷0ÔËÐÐ´¦Àí
+	if(SoftTimer0Cnt)		 //ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½0ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
 	{
 		SoftTimer0Cnt--;
 		if(SoftTimer0Cnt==0)
 			SoftTimer0Over=1;
 	}	
-	if(SoftTimer1Cnt)		 //Èí¼þ¶¨Ê±Æ÷1ÔËÐÐ´¦Àí
+	if(SoftTimer1Cnt)		 //ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½1ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
 	{
 		SoftTimer1Cnt--;
 		if(SoftTimer1Cnt==0)
 			SoftTimer1Over=1;
 	}
-	if(SoftTimer2Cnt)		 //Èí¼þ¶¨Ê±Æ÷2ÔËÐÐ´¦Àí
+	if(SoftTimer2Cnt)		 //ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½2ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
 	{
 		SoftTimer2Cnt--;
 		if(SoftTimer2Cnt==0)
 			SoftTimer2Over=1;
 	}
-	if(SoftTimer3Cnt)		 //Èí¼þ¶¨Ê±Æ÷3ÔËÐÐ´¦Àí
+	if(SoftTimer3Cnt)		 //ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½3ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
 	{
 		SoftTimer3Cnt--;
 		if(SoftTimer3Cnt==0)
 			SoftTimer3Over=1;
 	}	
-	if(SoftTimer4Cnt)		 //Èí¼þ¶¨Ê±Æ÷4ÔËÐÐ´¦Àí
+	if(SoftTimer4Cnt)		 //ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½4ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
 	{
 		SoftTimer4Cnt--;
 		if(SoftTimer4Cnt==0)

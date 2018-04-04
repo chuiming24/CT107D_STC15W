@@ -1,5 +1,5 @@
-#include <config.h>
-#include <usar.h>
+#include "config.h"
+#include "usar.h"
 
 bit busy = 0;
 bit uart_get_flag = 0;
