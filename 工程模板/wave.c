@@ -22,7 +22,7 @@ uint Distance_Get(void)
 		Distance = TH1;
 		Distance <<= 8;
 		Distance |= TL1;
-		Distance = Distance * 0.17;	//�Ŵ�1000��	
+		Distance = Distance * 0.17;	//单位为mm
 	}
 	TH1 = TL1 = 0;
 //	EA = 1;
