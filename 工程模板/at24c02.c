@@ -1,7 +1,7 @@
-#include <config.h>
-#include <iic.h>
-#include <at24c02.h>
-#include <delay.h>
+#include "config.h"
+#include "iic.h"
+#include "at24c02.h"
+#include "delay.h"
 
 void EEPROM_Write(uchar Address, uchar Data)
 {

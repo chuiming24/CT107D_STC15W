@@ -1,5 +1,5 @@
-#include <config.h>
-#include <frecounter.h>
+#include "config.h"
+#include "frecounter.h"
 
 bit OpenFreCntFlag = 1;
 uint FreCntTimeCnt = 1000;

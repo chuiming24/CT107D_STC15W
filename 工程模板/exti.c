@@ -1,8 +1,8 @@
-#include <config.h>
-#include <exti.h>
-#include <display.h>
-#include <key.h>
-#include <frecounter.h>
+#include "config.h"
+#include "exti.h"
+#include "display.h"
+#include "key.h"
+#include "frecounter.h"
 
 
 uint SoftTimer0Cnt = 0;

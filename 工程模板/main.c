@@ -1,12 +1,12 @@
-#include <config.h>
-#include <init.h>
-#include <exti.h>
-#include <display.h>
-#include <key.h>
-#include <at24c02.h>
-#include <ds18b20.h>
-#include <time.h>
-#include <frecounter.h>
+#include "config.h"
+#include "init.h"
+#include "exti.h"
+#include "display.h"
+#include "key.h"
+#include "at24c02.h"
+#include "ds18b20.h"
+#include "time.h"
+#include "frecounter.h"
 									 
 uint temp;
 uchar temp1;

@@ -1,6 +1,6 @@
-#include <config.h>
-#include <key.h>
-#include <display.h>
+#include "config.h"
+#include "key.h"
+#include "display.h"
 
 uchar keyPress = 0;
 bit key_re;

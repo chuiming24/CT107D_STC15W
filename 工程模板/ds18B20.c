@@ -1,6 +1,6 @@
-#include <config.h>
-#include <onewire.h>
-#include <ds18b20.h>
+#include "config.h"
+#include "onewire.h"
+#include "ds18b20.h"
 
 
 uchar Get_Temp(void)

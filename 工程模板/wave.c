@@ -1,5 +1,5 @@
-#include <config.h>
-#include "Wave.h"
+#include "config.h"
+#include "wave.h"
 
 uint Distance_Get(void)
 {
@@ -22,7 +22,7 @@ uint Distance_Get(void)
 		Distance = TH1;
 		Distance <<= 8;
 		Distance |= TL1;
-		Distance = Distance * 0.17;	//·Å´ó1000±¶	
+		Distance = Distance * 0.17;	//ï¿½Å´ï¿½1000ï¿½ï¿½	
 	}
 	TH1 = TL1 = 0;
 //	EA = 1;
