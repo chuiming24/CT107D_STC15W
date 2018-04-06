@@ -1,0 +1,50 @@
+C51 COMPILER V9.52.0.0   DISPLAY                                                           01/13/2018 21:31:16 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE DISPLAY
+OBJECT MODULE PLACED IN .\display.obj
+COMPILER INVOKED BY: C:\Keil_v4\C51\BIN\C51.EXE ..\HARDWARE（硬件模块）\display.c BROWSE INCDIR(..\APP(逻辑模块);..\CORE
+                    -（内核模块）;..\HARDWARE（硬件模块）) DEBUG OBJECTEXTEND PRINT(.\display.lst) TABS(2) OBJECT(.\display.obj)
+
+line level    source
+
+   1          //文件名：display.c
+   2          #include "stc_config.h"
+   3          #include "display.h"
+   4          
+   5          //数码管变量
+   6          uchar table[] = {0xc0,0xf9,0xa4,0xb0,
+   7          0x99,0x92,0x82,0xf8,
+   8          0x80,0x90,0xff,0xbf};//0-10,mie,-
+   9          uchar dspbuf[] = {10, 10, 10, 10, 10, 10, 2, 10};
+  10          uchar dspcom = 0;
+  11          
+  12          void display(){
+  13   1        P0 = 0x00;
+  14   1        setWei;
+  15   1        
+  16   1        P0 = table[dspbuf[dspcom]];
+  17   1        setDuan;
+  18   1        
+  19   1        P0 = (1<<dspcom);
+  20   1        setWei;
+  21   1          
+  22   1        dspcom++;
+  23   1        if(dspcom == 8){
+  24   2          dspcom = 0;
+  25   2        }
+  26   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     80    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     21    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

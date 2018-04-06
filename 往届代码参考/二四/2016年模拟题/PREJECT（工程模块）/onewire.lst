@@ -1,0 +1,161 @@
+C51 COMPILER V9.52.0.0   ONEWIRE                                                           01/13/2018 21:31:17 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE ONEWIRE
+OBJECT MODULE PLACED IN .\onewire.obj
+COMPILER INVOKED BY: C:\Keil_v4\C51\BIN\C51.EXE ..\HARDWARE（硬件模块）\onewire.c BROWSE INCDIR(..\APP(逻辑模块);..\CORE
+                    -（内核模块）;..\HARDWARE（硬件模块）) DEBUG OBJECTEXTEND PRINT(.\onewire.lst) TABS(2) OBJECT(.\onewire.obj)
+
+line level    source
+
+   1          /*
+   2            程序说明: 单总线驱动程序
+   3            软件环境: Keil uVision 4.10 
+   4            硬件环境: CT107单片机综合实训平台
+   5            日    期: 2011-8-9
+   6          */
+   7          
+   8          #include "onewire.h"
+   9          
+  10          //单总线延时函数
+  11          void Delay_OneWire(unsigned int t)
+  12          {
+  13   1        uchar i;
+  14   1        while(t--){
+  15   2           for(i=0;i<12;i++);
+  16   2        }
+  17   1      }
+  18          
+  19          //DS18B20芯片初始化
+  20          bit Init_DS18B20(void)
+  21          {
+  22   1        bit initflag = 0;
+  23   1        DQ = 1;
+  24   1        Delay_OneWire(12);
+  25   1        DQ = 0;
+  26   1        Delay_OneWire(80); //480us
+  27   1        DQ = 1;   //  
+  28   1        Delay_OneWire(10); //60us
+  29   1        initflag = DQ;    //检测是否初始化完成  
+  30   1        Delay_OneWire(5);
+  31   1        
+  32   1        return initflag;
+  33   1      }
+  34          
+  35          //通过单总线向DS18B20写一个字节//8位
+  36          
+  37          
+  38          void Write_DS18B20(unsigned char dat)
+  39          {
+  40   1        unsigned char i;
+  41   1        for(i=0;i<8;i++)
+  42   1        {
+  43   2          DQ = 0;
+  44   2          DQ = dat & 0x01;//0或者1
+  45   2          Delay_OneWire(5);//30us
+  46   2          DQ = 1;
+  47   2          dat >>= 1;
+  48   2        }
+  49   1        Delay_OneWire(5);
+  50   1      }
+  51          
+  52          //从DS18B20读取一个字节
+  53          unsigned char Read_DS18B20(void)
+  54          {
+C51 COMPILER V9.52.0.0   ONEWIRE                                                           01/13/2018 21:31:17 PAGE 2   
+
+  55   1        unsigned char i;
+  56   1        unsigned char dat;
+  57   1        
+  58   1        for(i=0;i<8;i++)
+  59   1        {
+  60   2          DQ = 0;
+  61   2          dat >>= 1;
+  62   2          DQ = 1;
+  63   2          if(DQ)
+  64   2          {
+  65   3            dat |= 0x80;
+  66   3          }     
+  67   2          Delay_OneWire(5);
+  68   2          //30us
+  69   2        }
+  70   1        return dat;
+  71   1      }
+  72          
+  73          int getTemp(void){
+  74   1        uchar a, b;
+  75   1        uint temp;//临时变量
+  76   1        float f_temp;//临时变量//可以计算小数部分
+  77   1        
+  78   1        //初始化
+  79   1        Init_DS18B20();//基本初始化
+  80   1        Write_DS18B20(0xcc);  //选择温度
+  81   1        Write_DS18B20(0x44);  //转化温度
+  82   1      
+  83   1        
+  84   1        //读取温度
+  85   1        Init_DS18B20();
+  86   1        Write_DS18B20(0xcc);//选取温度芯片
+  87   1        Write_DS18B20(0xbe);//读取数据
+  88   1      
+  89   1        a = Read_DS18B20(); //回传一个16位的温度数据。
+  90   1        b = Read_DS18B20(); //A是低位，B是高位
+  91   1        
+  92   1        //比如温度给的数据是0000 1111 0000 1011
+  93   1        //                 b = 0000 1111, a = 0000 1011
+  94   1        //1.b 是char,他只有8位不够放。所以先放在temp里，
+  95   1        //  temp = b => temp = 0000 0000 0000 1111
+  96   1        //2.把temp里面的数据移动到高位，因为b本来属于高位
+  97   1        //  temp <<= 8 => temp = 0000 1111 0000 0000
+  98   1        //3.把temp 和A合在一起，变成原来的数据
+  99   1        //  temp |= a =>  temp = 0000 1111 0000 1011
+ 100   1        
+ 101   1        //数据处理
+ 102   1          //首先要把A,B合在一起
+ 103   1        temp = b;
+ 104   1        temp <<= 8;
+ 105   1        temp |= a;
+ 106   1          //转换成我们实际的温度
+ 107   1        
+ 108   1        f_temp = temp;
+ 109   1        f_temp = f_temp *0.0625;    //得到实际的温度
+ 110   1              // temp >> 4
+ 111   1              
+ 112   1              
+ 113   1          //四舍五入    f_temp = 24.5625
+ 114   1        temp = f_temp + 0.5;
+ 115   1        
+ 116   1        
+C51 COMPILER V9.52.0.0   ONEWIRE                                                           01/13/2018 21:31:17 PAGE 3   
+
+ 117   1        return temp; //25
+ 118   1        
+ 119   1        
+ 120   1        
+ 121   1        
+ 122   1      }
+ 123          
+ 124          //读char 写char
+ 125          //命令式，我们要写一个命令和一个数据  
+ 126          //Write_DS18B20(0x01);  //命令
+ 127          //Read_DS18B20(data); //数据
+ 128          
+ 129          
+ 130          //寄存器的方式。
+ 131          //Write_DS18B20(0x01);  //读取还是写入
+ 132          //Write_DS18B20(addr); //寄存器的地址
+ 133          //Read_DS18B20(data); //寄存器的书
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    214    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

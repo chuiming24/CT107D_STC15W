@@ -1,0 +1,8 @@
+".\display.obj",
+".\key.obj",
+".\onewire.obj",
+".\word_gui.obj",
+".\set_gui.obj",
+"main.obj" 
+TO "2016" 
+RAMSIZE(256) 

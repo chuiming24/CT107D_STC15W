@@ -1,0 +1,1 @@
+"..\APP(逻辑模块)\word_gui.c" BROWSE INCDIR(..\APP(逻辑模块);..\CORE（内核模块）;..\HARDWARE（硬件模块）) DEBUG OBJECTEXTEND PRINT(.\word_gui.lst) TABS (2) OBJECT(.\word_gui.obj)

@@ -1,0 +1,165 @@
+C51 COMPILER V9.01   AT24C02                                                               02/05/2017 20:31:00 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE AT24C02
+OBJECT MODULE PLACED IN at24c02.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE at24c02.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2            程序说明: IIC总线驱动程序
+   3            软件环境: Keil uVision 4.10 
+   4            硬件环境: CT107单片机综合实训平台(12MHz)
+   5            日    期: 2011-8-9
+   6          */
+   7          
+   8          #include "at24c02.h"
+   9          
+  10          //总线启动条件
+  11          void IIC_Start(void)
+  12          {
+  13   1              SDA = 1;
+  14   1              SCL = 1;
+  15   1              somenop;
+  16   1              SDA = 0;
+  17   1              somenop;
+  18   1              SCL = 0;        
+  19   1      }
+  20          
+  21          //总线停止条件
+  22          void IIC_Stop(void)
+  23          {
+  24   1              SDA = 0;
+  25   1              SCL = 1;
+  26   1              somenop;
+  27   1              SDA = 1;
+  28   1      }
+  29          
+  30          //应答位控制
+  31          void IIC_Ack(unsigned char ackbit)
+  32          {
+  33   1              if(ackbit) 
+  34   1              {       
+  35   2                      SDA = 0;
+  36   2              }
+  37   1              else 
+  38   1              {
+  39   2                      SDA = 1;
+  40   2              }
+  41   1              somenop;
+  42   1              SCL = 1;
+  43   1              somenop;
+  44   1              SCL = 0;
+  45   1              SDA = 1; 
+  46   1              somenop;
+  47   1      }
+  48          
+  49          //等待应答
+  50          bit IIC_WaitAck(void)
+  51          {
+  52   1              SDA = 1;
+  53   1              somenop;
+  54   1              SCL = 1;
+  55   1              somenop;
+C51 COMPILER V9.01   AT24C02                                                               02/05/2017 20:31:00 PAGE 2   
+
+  56   1              if(SDA)    
+  57   1              {   
+  58   2                      SCL = 0;
+  59   2                      IIC_Stop();
+  60   2                      return 0;
+  61   2              }
+  62   1              else  
+  63   1              { 
+  64   2                      SCL = 0;
+  65   2                      return 1;
+  66   2              }
+  67   1      }
+  68          
+  69          //通过I2C总线发送数据
+  70          void IIC_SendByte(unsigned char byt)
+  71          {
+  72   1              unsigned char i;
+  73   1              for(i=0;i<8;i++)
+  74   1              {   
+  75   2                      if(byt&0x80) 
+  76   2                      {       
+  77   3                              SDA = 1;
+  78   3                      }
+  79   2                      else 
+  80   2                      {
+  81   3                              SDA = 0;
+  82   3                      }
+  83   2                      somenop;
+  84   2                      SCL = 1;
+  85   2                      byt <<= 1;
+  86   2                      somenop;
+  87   2                      SCL = 0;
+  88   2              }
+  89   1      }
+  90          
+  91          //从I2C总线上接收数据
+  92          unsigned char IIC_RecByte(void)
+  93          {
+  94   1              unsigned char da;
+  95   1              unsigned char i;
+  96   1              
+  97   1              for(i=0;i<8;i++)
+  98   1              {   
+  99   2                      SCL = 1;
+ 100   2                      somenop;
+ 101   2                      da <<= 1;
+ 102   2                      if(SDA) 
+ 103   2                      da |= 0x01;
+ 104   2                      SCL = 0;
+ 105   2                      somenop;
+ 106   2              }
+ 107   1              return da;
+ 108   1      }
+ 109          
+ 110          void writeEeprom(uchar addr, uchar date){
+ 111   1              IIC_Start();
+ 112   1              IIC_SendByte(0xa0);
+ 113   1              IIC_WaitAck();
+ 114   1              IIC_SendByte(addr);
+ 115   1              IIC_WaitAck();  
+ 116   1              IIC_SendByte(date);
+ 117   1              IIC_WaitAck();
+C51 COMPILER V9.01   AT24C02                                                               02/05/2017 20:31:00 PAGE 3   
+
+ 118   1              IIC_Stop();     
+ 119   1              somenop;                
+ 120   1      }
+ 121          
+ 122          uchar readEeprom(uchar addr){
+ 123   1              uchar date = 0;
+ 124   1      
+ 125   1              IIC_Start();
+ 126   1              IIC_SendByte(0xa0);
+ 127   1              IIC_WaitAck();
+ 128   1              IIC_SendByte(addr);
+ 129   1              IIC_WaitAck();
+ 130   1              IIC_Start();
+ 131   1              IIC_SendByte(0xa1);
+ 132   1              IIC_WaitAck();  
+ 133   1              date = IIC_RecByte();
+ 134   1              IIC_Ack(0);
+ 135   1              IIC_Stop();     
+ 136   1              
+ 137   1              return date;            
+ 138   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    376    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

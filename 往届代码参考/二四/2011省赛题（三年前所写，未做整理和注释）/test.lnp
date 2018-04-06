@@ -1,0 +1,7 @@
+"mian.obj",
+"key.obj",
+"display.obj",
+"onewire.obj",
+"at24c02.obj" 
+TO "test" 
+RAMSIZE(256) 

@@ -1,0 +1,127 @@
+C51 COMPILER V9.52.0.0   KEY                                                               01/13/2018 21:31:17 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\key.obj
+COMPILER INVOKED BY: C:\Keil_v4\C51\BIN\C51.EXE ..\HARDWARE（硬件模块）\key.c BROWSE INCDIR(..\APP(逻辑模块);..\CORE（内
+                    -核模块）;..\HARDWARE（硬件模块）) DEBUG OBJECTEXTEND PRINT(.\key.lst) TABS(2) OBJECT(.\key.obj)
+
+line level    source
+
+   1          //文件名：key.c
+   2          #include <stc_config.h>
+   3          
+   4          
+   5          sbit KEY1 = P3^0;
+   6          sbit KEY2 = P3^1;
+   7          sbit KEY3 = P3^2;
+   8          sbit KEY4 = P3^3;
+   9          
+  10          
+  11          void Delay10ms()    //@11.0592MHz
+  12          {
+  13   1        unsigned char i, j;
+  14   1      
+  15   1        i = 108;
+  16   1        j = 145;
+  17   1        do
+  18   1        {
+  19   2          while (--j);
+  20   2        } while (--i);
+  21   1      }
+  22          
+  23          
+  24          //用于扫描键盘
+  25          //返回：键值
+  26          uchar scanKey(){
+  27   1        uchar output = 0xff;
+  28   1        uchar temp = 0;
+  29   1        
+  30   1        //P3.6 == P42,  
+  31   1        //P3.7 == P44
+  32   1        
+  33   1        P44 = 0;
+  34   1        P42 = 1;
+  35   1        P3 = 0xff & ~(1<<7);  //1<<7  1000 0000  ~(1<<7)   0111 1111
+  36   1        temp = P3 & 0x0f;
+  37   1        if(temp != 0x0f){
+  38   2          Delay10ms();
+  39   2          
+  40   2          temp = P3 & 0x0f;
+  41   2          if(temp != 0x0f){
+  42   3            switch(temp){
+  43   4              case 0x07: output = 0; break;//0111
+  44   4              case 0x0b: output = 7; break;//1011
+  45   4              case 0x0d: output = 4; break;//1101
+  46   4              case 0x0e: output = 1; break;//1110
+  47   4            }
+  48   3          }
+  49   2          
+  50   2          while(temp != 0x0f){
+  51   3            temp = P3 & 0x0f;
+  52   3          }
+  53   2        }
+  54   1        
+C51 COMPILER V9.52.0.0   KEY                                                               01/13/2018 21:31:17 PAGE 2   
+
+  55   1        P44 = 1;
+  56   1        P42 = 0;
+  57   1        P3 = 0xff & ~(1<<6);  //1<<7  1000 0000  ~(1<<7)   1011 1111
+  58   1        temp = P3 & 0x0f;
+  59   1        if(temp != 0x0f){
+  60   2          Delay10ms();
+  61   2          
+  62   2          temp = P3 & 0x0f;
+  63   2          if(temp != 0x0f){
+  64   3            switch(temp){
+  65   4              case 0x07: output = 16; break;
+  66   4              case 0x0b: output = 8; break;
+  67   4              case 0x0d: output = 5; break;
+  68   4              case 0x0e: output = 2; break;
+  69   4            }
+  70   3          }
+  71   2          
+  72   2          while(temp != 0x0f){
+  73   3            temp = P3 & 0x0f;
+  74   3          }
+  75   2        }
+  76   1      
+  77   1        P44 = 1;
+  78   1        P42 = 1;
+  79   1        P3 = 0xff & ~(1<<5);  //1<<7  1000 0000  ~(1<<7)   1101 1111
+  80   1        temp = P3 & 0x0f;
+  81   1        if(temp != 0x0f){
+  82   2          Delay10ms();
+  83   2          
+  84   2          temp = P3 & 0x0f;
+  85   2          if(temp != 0x0f){
+  86   3            switch(temp){
+  87   4              case 0x07: output = 17; break;
+  88   4              case 0x0b: output = 9; break;
+  89   4              case 0x0d: output = 6; break;
+  90   4              case 0x0e: output = 3; break;
+  91   4            }
+  92   3          }
+  93   2          
+  94   2          while(temp != 0x0f){
+  95   3            temp = P3 & 0x0f;
+  96   3          }
+  97   2        }
+  98   1      
+  99   1        
+ 100   1        return output;
+ 101   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    224    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,114 @@
+C51 COMPILER V9.01   ONEWIRE                                                               02/05/2017 20:31:00 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE ONEWIRE
+OBJECT MODULE PLACED IN onewire.OBJ
+COMPILER INVOKED BY: E:\keil4-C51\C51\BIN\C51.EXE onewire.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2            程序说明: 单总线驱动程序
+   3            软件环境: Keil uVision 4.10 
+   4            硬件环境: CT107单片机综合实训平台
+   5            日    期: 2011-8-9
+   6          */
+   7          
+   8          
+   9          #include"onewire.h"
+  10          //单总线延时函数
+  11          void Delay_OneWire(unsigned int t)
+  12          {
+  13   1              uchar i;
+  14   1        while(t--){
+  15   2              for (i = 0; i < 12; i++);
+  16   2      }
+  17   1      }
+  18          
+  19          //DS18B20芯片初始化
+  20          bit Init_DS18B20(void)
+  21          {
+  22   1              bit initflag = 0;
+  23   1              DQ = 1;
+  24   1              Delay_OneWire(12);
+  25   1              DQ = 0;
+  26   1              Delay_OneWire(80); 
+  27   1              DQ = 1;
+  28   1              Delay_OneWire(10); 
+  29   1              initflag = DQ;    
+  30   1              Delay_OneWire(5);
+  31   1        
+  32   1              return initflag;
+  33   1      }
+  34          
+  35          //通过单总线向DS18B20写一个字节
+  36          void Write_DS18B20(unsigned char dat)
+  37          {
+  38   1              unsigned char i;
+  39   1              for(i=0;i<8;i++)
+  40   1              {
+  41   2                      DQ = 0;
+  42   2                      DQ = dat&0x01;
+  43   2                      Delay_OneWire(5);
+  44   2                      DQ = 1;
+  45   2                      dat >>= 1;
+  46   2              }
+  47   1              Delay_OneWire(5);
+  48   1      }
+  49          
+  50          //从DS18B20读取一个字节
+  51          unsigned char Read_DS18B20(void)
+  52          {
+  53   1              unsigned char i;
+  54   1              unsigned char dat;
+  55   1        
+C51 COMPILER V9.01   ONEWIRE                                                               02/05/2017 20:31:00 PAGE 2   
+
+  56   1              for(i=0;i<8;i++)
+  57   1              {
+  58   2                      DQ = 0;
+  59   2                      dat >>= 1;
+  60   2                      DQ = 1;
+  61   2                      if(DQ)
+  62   2                      {
+  63   3                              dat |= 0x80;
+  64   3                      }           
+  65   2                      Delay_OneWire(5);
+  66   2              }
+  67   1              return dat;
+  68   1      }
+  69          
+  70          //读取温度
+  71          uint readTheTemp(){
+  72   1              uchar a, b;
+  73   1              uint temp;
+  74   1              
+  75   1              Init_DS18B20();
+  76   1              Write_DS18B20(0xcc);
+  77   1              Write_DS18B20(0x44);
+  78   1              Delay_OneWire(200);
+  79   1              Init_DS18B20();
+  80   1              Write_DS18B20(0xcc);
+  81   1              Write_DS18B20(0xbe);
+  82   1              a = Read_DS18B20();
+  83   1              b = Read_DS18B20();
+  84   1              temp = a;
+  85   1              temp <<= 8;
+  86   1              temp |= b;
+  87   1              temp = temp * 0.0625;
+  88   1              return temp;
+  89   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    190    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

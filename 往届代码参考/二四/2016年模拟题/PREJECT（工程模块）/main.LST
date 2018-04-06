@@ -1,0 +1,127 @@
+C51 COMPILER V9.52.0.0   MAIN                                                              01/13/2018 21:31:18 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil_v4\C51\BIN\C51.EXE main.c BROWSE INCDIR(..\APP(Âß¼­Ä£¿é);..\CORE£¨ÄÚºËÄ£¿é£©;..\HARDWARE£¨Ó
+                    -²¼þÄ£¿é£©) DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          //ÎÄ¼þÃû£ºmain.c
+   2          
+   3          //Ã¿10msÉ¨ÃèÒ»´Î°´¼ü£¬°Ñ°´¼üµÄÊýÖµ´«µ½ÊýÂë¹ÜÉÏ
+   4          
+   5          //ÏµÍ³Í·ÎÄ¼þ
+   6          #include "stc_config.h"
+   7          
+   8          //ÍâÉèÍ·ÎÄ¼þ
+   9          #include "display.h"
+  10          #include "key.h"
+  11          #include "onewire.h"
+  12          
+  13          //¹¦ÄÜº¯ÊýÍ·ÎÄ¼þ
+  14          #include "word_gui.h"
+  15          #include "set_gui.h"
+  16          
+  17          
+  18          
+  19          //ÏµÍ³±äÁ¿
+  20          uchar sys_stat = WORD_GUI;
+  21          uchar sys_temp_upper = 18;
+  22          uchar sys_temp_lower = 20;
+  23          uchar sys_led_cache = 0xff;
+  24          
+  25          
+  26          //¶¨Ê±Æ÷±äÁ¿
+  27          uint Key_count = 0; //¼üÅÌ¼ÆÊý±äÁ¿
+  28          bit Key_Flag = 0;   //±êÖ¾Î»
+  29          
+  30          uint Temp_count = 0;  //ÎÂ¶È¼ÆÊý±äÁ¿
+  31          bit Temp_Flag = 0;    //±êÖ¾Î»
+  32          
+  33          uint led_count = 0;   //ledÈí¼þ¶¨Ê±Æ÷¼ÆÊý±äÁ¿
+  34          uchar led_usedFlag = 0; //ledÈí¼þ¶¨Ê±Æ÷Ê¹ÓÃ±êÖ¾
+  35          
+  36          
+  37          void Timer0Init(void) 
+  38          {
+  39   1        AUXR &= 0x7F; 
+  40   1        TMOD &= 0xF0; 
+  41   1        TL0 = 0xCD; 
+  42   1        TH0 = 0xF8; 
+  43   1        TF0 = 0;    
+  44   1        TR0 = 1;  
+  45   1        ET0 = 1;
+  46   1        EA = 1;
+  47   1      }
+  48          
+  49          
+  50          
+  51          void main(){
+  52   1        
+  53   1        //³õÊ¼»¯
+  54   1        uchar Key_temp = 0xff;
+C51 COMPILER V9.52.0.0   MAIN                                                              01/13/2018 21:31:18 PAGE 2   
+
+  55   1        int Temp_temp = 0;
+  56   1        
+  57   1        
+  58   1        P0 = 0x00;
+  59   1        setOpen;
+  60   1        P0 = 0xff;
+  61   1        setLed;
+  62   1      
+  63   1        
+  64   1        
+  65   1        Timer0Init();
+  66   1        while(1){
+  67   2          switch(sys_stat){
+  68   3            case WORD_GUI:
+  69   3              word_gui_funtion();
+  70   3            
+  71   3              break;
+  72   3            case SET_GUI:
+  73   3              set_gui_funtion();
+  74   3            
+  75   3              break;
+  76   3          }
+  77   2        }
+  78   1      }
+  79          
+  80          
+  81          
+  82          void timer0() interrupt 1{    //1ms
+  83   1        Key_count++;
+  84   1        if(Key_count == 10){
+  85   2          Key_count = 0;
+  86   2          Key_Flag = 1;
+  87   2        }
+  88   1        
+  89   1        Temp_count++;
+  90   1        if(Temp_count ==250){
+  91   2          Temp_count = 0;
+  92   2          Temp_Flag = 1;
+  93   2        }
+  94   1        
+  95   1        if(led_count != 0){
+  96   2          led_count--;
+  97   2        }
+  98   1        
+  99   1        
+ 100   1        display();
+ 101   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    194    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
