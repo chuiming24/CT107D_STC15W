@@ -12,5 +12,3 @@
 5. 蜂鸣器
 6. LED
 7. 继电器
-
-这套赛题可在https://wenku.baidu.com/view/ac778c00cfc789eb172dc8a4.html找到
