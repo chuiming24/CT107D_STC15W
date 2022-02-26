@@ -12,14 +12,14 @@ uint temp;
 uchar temp1;
 
 void main(){
-	gpio();					//³õÊ¼»¯Õë½Å
+	gpio();					//åˆå§‹åŒ–é’ˆè„š
 	P0 = 0xff;setY4;
 	P0 = 0x00;setY5;
-	Timer0Init();			//³õÊ¼»¯¼ÆÊıÆ÷0 ÓÃÓÚ¼ÆÊı
-	FreCntInit();
+	Timer0Init();			//åˆå§‹åŒ–è®¡æ•°å™¨0 ç”¨äºè®¡æ•°
+	//FreCntInit();			//è¶…å£°æ³¢
 	EA = 1;
 	ET0 = 1;
-	dspbuf[1] = EEPROM_Read(0x00);
+	dspbuf[1] = EEPROM_Read(0x00);		//æµ‹è¯•eeprom
 	set_rtc();
 	OpenFreCnt();
 	while(1){
@@ -30,20 +30,20 @@ void main(){
 		}
 
 
-		if(SoftTimer1Cnt == 0) SoftTimer1Cnt = 500;
+		if(SoftTimer1Cnt == 0) SoftTimer1Cnt = 500; //è½¯ä»¶è®¡æ•°å™¨
 		if(_testbit_(SoftTimer1Over))
 
 		{
-			read_rtc();
-			dspbuf[2] = time_data[5]/10%10;
-			dspbuf[3] = time_data[5]%10;
+			read_rtc();			//è¯»å–æ—¶é’Ÿ
+			dspbuf[2] = time_data[6]/10%10;  //æ¯éš”åŠç§’æ˜¾ç¤ºæ—¶é’Ÿçš„ç§’æ•°
+			dspbuf[3] = time_data[6]%10;
 		}
 
-		temp = getFreCntValue();		
-		dspbuf[4] = temp /1000 %10;
-		dspbuf[5] = temp /100 %10; 
-		dspbuf[6] = temp /10 %10;
-		dspbuf[7] = temp %10;
+		//temp = getFreCntValue();		
+		//dspbuf[4] = temp /1000 %10;
+		//dspbuf[5] = temp /100 %10; 
+		//dspbuf[6] = temp /10 %10;
+		//dspbuf[7] = temp %10;
 	}
 }
 
