@@ -20,8 +20,8 @@ void main(){
 	EA = 1;
 	ET0 = 1;
 	dspbuf[1] = EEPROM_Read(0x00);		//测试eeprom
-	set_rtc();
-	OpenFreCnt();
+	set_rtc();				//DS1302
+	//OpenFreCnt();
 	while(1){
 		if(TextKey()){
 			 temp1 = GetKey();
@@ -30,7 +30,7 @@ void main(){
 		}
 
 
-		if(SoftTimer1Cnt == 0) SoftTimer1Cnt = 500; //软件计数器
+		if(SoftTimer1Cnt == 0) SoftTimer1Cnt = 500; //软件计数器 500ms
 		if(_testbit_(SoftTimer1Over))
 
 		{
